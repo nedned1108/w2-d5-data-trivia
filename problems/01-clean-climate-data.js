@@ -11,8 +11,17 @@ For example, it should return:
 [ "Amsterdam, Netherlands", "Athens, Greece", ...plus 103 more cities ]
 */
 
-
-
+const listAllCitiesWithCountries = (climateData) => {
+    let citiesName = [];
+    climateData.map((cityObj) => {
+        let cityName = cityObj["city"];
+        let countryName = cityObj["country"];
+        let str = cityName + ", " + countryName
+        citiesName.push(str);
+    })
+    return citiesName;
+}
+console.log(listAllCitiesWithCountries(climateData))
 
 /* 02. `listAllUsCities`
 What are all of the United States cities included in the data set?
@@ -25,9 +34,20 @@ For example, it should return:
 */
 
 // Your code here
+const listAllUsCities = (climateData) => {
+    let cityOfUS = []
+    climateData.forEach((cityObj) => {
+        let cityName = cityObj["city"];
+        let countryName = cityObj["country"];
+        let str = cityName + ", " + countryName
+        if (cityObj.country === "United States") {
+            cityOfUS.push(str);
+        }
+    })
+    return cityOfUS;
+}
 
-
-
+console.log(listAllUsCities(climateData))
 /* 03. `findDuplicates` What cities are included more than once in the data?
 
 Write a function, `findDuplicates` that finds all duplicate cities. Return an
@@ -39,8 +59,20 @@ was duplicated in id 3, 7, and 9, the returned object should look like:
 */
 
 // Your code here
-
-
+const findDuplicates = (climateData) => {
+    let duplicateObj = {};
+        climateData.forEach((cityObj) => {
+            let cityName = cityObj["city"];
+            if (duplicateObj.city === undefined) {
+                // duplicateId.push(cityObj.id)
+                duplicateObj[cityName] = cityObj.id
+            } else {
+                duplicatObj[cityName] = duplicatObj[cityName].concat(cityObj.id)
+            }
+    })
+    return duplicateObj;
+}
+console.log(findDuplicates(climateData))
 /* 04. `returnDuplicate` Which city object should be corrected in
 the data set?
 
